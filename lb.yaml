@@ -1,0 +1,16 @@
+sedutil:
+  sedutil:
+    build:
+      - make -f Makefile.lb build
+    install:
+      - make -f Makefile.lb install
+    checkin:
+      - make -f Makefile.lb checkin
+    deps:
+      - file://Common
+      - file://debian
+      - file://linux
+      - file://lb.yaml
+      - file://Makefile.lb
+      - file://configure.ac
+      - file://Makefile.am

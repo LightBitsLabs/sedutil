@@ -1,0 +1,28 @@
+include $(WORKSPACE_TOP)/common/Makefile.env
+
+REPO=sedutil
+COMP=sedutil
+
+SEDUTIL_INSTALL_DIR ?= $(shell component-tool localpath --repo=$(REPO) --type=$(BUILD_TYPE) $(COMP))
+
+BIN=sedutil-cli
+
+.PHONY: all build install checkin clean
+
+all: build
+
+build:
+	$(Q)autoreconf -i
+	$(Q)./configure
+	$(Q)$(MAKE) config.h linux/Version.h $(BIN)
+	$(Q)rm linux/Version.h
+
+install:
+	$(Q)mkdir -p $(SEDUTIL_INSTALL_DIR)
+	$(Q)cp $(BIN) $(SEDUTIL_INSTALL_DIR)/
+
+checkin:
+	$(Q)component-tool checkin -v --repo=$(REPO) --type=$(BUILD_TYPE) $(COMP)
+
+clean:
+	$(Q)$(MAKE) distclean

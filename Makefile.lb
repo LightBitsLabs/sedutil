@@ -13,7 +13,7 @@ all: build
 
 build:
 	$(Q)autoreconf -i
-	$(Q)./configure
+	$(Q)LDFLAGS=-static ./configure
 	$(Q)$(MAKE) config.h linux/Version.h $(BIN)
 	$(Q)rm linux/Version.h
 
